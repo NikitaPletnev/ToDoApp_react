@@ -42,7 +42,10 @@ class ToDoApp extends React.Component{
         	checked:false
         });
 
-        this.setState({todos});
+        this.setState({
+		todos,
+		newToDoText:''
+	});
 	}
 
 	render(){
