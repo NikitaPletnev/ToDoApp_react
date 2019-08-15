@@ -15,7 +15,8 @@ class ToDoApp extends React.Component{
 			    {name:"Написать ToDoApp на реакте",checked:true},
 			    {name:"Закинуть ToDoApp на гит-хаб",checked:true},
 			    {name:"Наслаждаться",checked:false}
-			]
+			],
+			newToDoText:''
 		};
 	}
 
@@ -34,8 +35,21 @@ class ToDoApp extends React.Component{
 		this.setState({todos});
 	}
 
+	addToDo(){
+        const todos = this.state.todos;
+        todos.push({
+        	name:this.state.newToDoText,
+        	checked:false
+        });
+
+        this.setState({todos});
+	}
+
 	render(){
 		return (
+			<div>
+			<h1>ToDo List</h1>
+			
 			   <ol>
 			   	  {
 			   	  	this.state.todos.map((todo,i) => {
@@ -53,6 +67,19 @@ class ToDoApp extends React.Component{
 			   	  	})
 			   	  }
 			   </ol>
+			   <input type="text" 
+			   placeholder = "Новая задача"
+			   value = {this.state.newToDoText}
+			   onChange = {ev =>{
+			   	this.setState({newToDoText:ev.target.value})
+			   }}
+			   onKeyUp = {ev => {
+			   	if(ev.keyCode === 13){
+			   		this.addToDo();
+			   	}
+			   }} 
+			   />
+			   </div>
 			);
 	}
 }
@@ -63,4 +90,5 @@ ReactDOM.render(
    <ToDoApp />,
    document.querySelector('#app')
 );
+
 
